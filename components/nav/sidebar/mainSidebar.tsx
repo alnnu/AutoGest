@@ -14,9 +14,13 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu"
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { sidebarMenuType } from "@/utils/types/navMenus"
-import { Wrench } from "lucide-react"
+import { Wrench, Settings } from "lucide-react"
 import { DynamicIcon } from "lucide-react/dynamic"
+import { AdminUserData } from "@/utils/data/usersData"
+import { UserType } from "@/utils/types/usersType"
 
 export default function MainSidebar() {
   const pages: sidebarMenuType = [
@@ -45,10 +49,12 @@ export default function MainSidebar() {
       href: "servicos",
     },
   ]
+
+  const account: UserType = AdminUserData
   return (
     <Sidebar>
       <SidebarHeader>
-        <div className="mx-4 mt-6 flex">
+        <div className="mx-4 mt-6 flex items-center">
           <div className="mr-4 flex size-12 items-center justify-center rounded-xl bg-blue-500">
             <Wrench className="text-white" />
           </div>
@@ -80,7 +86,23 @@ export default function MainSidebar() {
           </NavigationMenu>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter className="border-t-2">
+        <div className="my-3 ml-4 flex items-center">
+          <Avatar className="mr-4 size-9">
+            <AvatarImage src={account.photo} />
+            <AvatarFallback>AD</AvatarFallback>
+          </Avatar>
+          <div className="mr-4">
+            <h3 className="text-sm font-bold">
+              {account.name}
+              <p className="text-sm font-light">{account.email}</p>
+            </h3>
+          </div>
+          <div>
+            <Settings className="size-4 text-gray-600" />
+          </div>
+        </div>
+      </SidebarFooter>
     </Sidebar>
   )
 }
