@@ -34,10 +34,7 @@ export default function RootLayout({
           <SidebarProvider>
             <MainSidebar />
 
-            <main>
-              <SidebarTrigger />
-              {children}
-            </main>
+            <main className="w-full bg-gray-100 px-12 py-8">{children}</main>
           </SidebarProvider>
         </ThemeProvider>
       </body>
