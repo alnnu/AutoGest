@@ -23,21 +23,21 @@ export default function Clientes() {
   ).length
 
   return (
-    <>
-      <div className="flex w-full items-center justify-between">
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 className="text-2xl font-bold">Clientes</h2>
-          <p className="text-sm">Gerencie seus clientes cadastrados</p>
+          <p className="text-sm text-muted-foreground">Gerencie seus clientes cadastrados</p>
         </div>
         <div>
-          <Button className="bg-blue-500 px-5 py-4">
-            <Plus className="mr-2" />
+          <Button className="w-full bg-blue-500 px-5 py-4 hover:bg-blue-600 sm:w-auto">
+            <Plus className="mr-2 h-4 w-4" />
             Novo Cliente
           </Button>
         </div>
       </div>
 
-      <div className="mt-10 w-full rounded-xl bg-white px-6 py-4 shadow-sm">
+      <div className="w-full rounded-xl bg-white px-6 py-4 shadow-sm">
         <Input
           placeholder="Buscar por nome"
           className="h-12"
@@ -45,15 +45,13 @@ export default function Clientes() {
         />
       </div>
 
-      <div className="mt-6 grid grid-cols-3 gap-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <DefaultInfoCard label="Total de Clientes" info={totalClients} />
-
         <DefaultInfoCard label="Novos este Mês" info={totalMonthClients} />
-
         <DefaultInfoCard label="Clientes Ativos" info={totalActiveClients} />
       </div>
 
-      <div className="mt-6 grid grid-cols-3 gap-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {clients
           .filter((client) =>
             client.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
@@ -62,6 +60,6 @@ export default function Clientes() {
             <ClientCard key={i} client={client} />
           ))}
       </div>
-    </>
+    </div>
   )
 }

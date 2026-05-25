@@ -34,7 +34,7 @@ export default function RootLayout({
           <SidebarProvider>
             <MainSidebar />
 
-            <main className="w-full bg-gray-100 px-12 py-8">{children}</main>
+            <main className="w-full bg-gray-100 px-4 py-8 md:px-12">{children}</main>
           </SidebarProvider>
         </ThemeProvider>
       </body>
