@@ -6,6 +6,7 @@ import { Plus } from "lucide-react"
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import ClientCard from "@/components/cards/clientCard"
+import DefaultInfoCard from "@/components/cards/defaultInfoCard"
 
 export default function Clientes() {
   const [clients, setClients] = useState<clientType[]>(clientsColection)
@@ -45,18 +46,11 @@ export default function Clientes() {
       </div>
 
       <div className="mt-6 grid grid-cols-3 gap-4">
-        <div className="rounded-xl bg-white px-5 py-4 shadow-sm">
-          <h3 className="text-sm">Total de Clientes</h3>
-          <p className="mt-4 text-2xl font-bold">{totalClients}</p>
-        </div>
-        <div className="rounded-xl bg-white px-5 py-4 shadow-sm">
-          <h3 className="text-sm">Novos este Mês</h3>
-          <p className="mt-4 text-2xl font-bold">{totalMonthClients}</p>
-        </div>
-        <div className="rounded-xl bg-white px-5 py-4 shadow-sm">
-          <h3 className="text-sm">Clientes Ativos</h3>
-          <p className="mt-4 text-2xl font-bold">{totalActiveClients}</p>
-        </div>
+        <DefaultInfoCard label="Total de Clientes" info={totalClients} />
+
+        <DefaultInfoCard label="Novos este Mês" info={totalMonthClients} />
+
+        <DefaultInfoCard label="Clientes Ativos" info={totalActiveClients} />
       </div>
 
       <div className="mt-6 grid grid-cols-3 gap-4">
