@@ -5,6 +5,7 @@ import { clientType } from "@/utils/types/clients"
 import { Plus } from "lucide-react"
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
+import ClientCard from "@/components/cards/clientCard"
 
 export default function Clientes() {
   const [clients, setClients] = useState<clientType[]>(clientsColection)
@@ -43,7 +44,7 @@ export default function Clientes() {
         />
       </div>
 
-      <div className="mt-6 grid grid-flow-col gap-4">
+      <div className="mt-6 grid grid-cols-3 gap-4">
         <div className="rounded-xl bg-white px-5 py-4 shadow-sm">
           <h3 className="text-sm">Total de Clientes</h3>
           <p className="mt-4 text-2xl font-bold">{totalClients}</p>
@@ -58,13 +59,15 @@ export default function Clientes() {
         </div>
       </div>
 
-      {clients
-        .filter((client) =>
-          client.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
-        )
-        .map((client, i) => (
-          <div key={i}>{client.name}</div>
-        ))}
+      <div className="mt-6 grid grid-cols-3 gap-4">
+        {clients
+          .filter((client) =>
+            client.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+          )
+          .map((client, i) => (
+            <ClientCard key={i} client={client} />
+          ))}
+      </div>
     </>
   )
 }
