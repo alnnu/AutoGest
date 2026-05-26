@@ -105,7 +105,10 @@ const columns: ColumnDef<veiculosType>[] = [
     cell: ({ row }) => {
       return (
         <div className="text-right">
-          <Link href="#" className="rounded-xl px-4 py-2 hover:bg-muted">
+          <Link
+            href={`/veiculos/${row.original.placa}`}
+            className="rounded-xl px-4 py-2 hover:bg-muted"
+          >
             Ver detalhes
           </Link>
         </div>
