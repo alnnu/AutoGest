@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/table"
 import { User, Gauge } from "lucide-react"
 import Link from "next/link"
+import { Badge } from "../ui/badge"
 
 interface DataTableProps {
   data: veiculosType[]
@@ -84,17 +85,17 @@ const columns: ColumnDef<veiculosType>[] = [
     cell: ({ row }) => {
       const status = row.getValue("status") as string
       return (
-        <span
-          className={`w-fit rounded-xl px-3 py-2 capitalize ${
+        <Badge
+          className={
             status === "ativo"
               ? "border border-green-700 bg-green-100 text-green-700"
               : status === "Em Manutenção"
                 ? "border border-yellow-700 bg-yellow-100 text-yellow-700"
                 : "border border-blue-700 bg-blue-100 text-blue-700"
-          }`}
+          }
         >
           {status}
-        </span>
+        </Badge>
       )
     },
   },
