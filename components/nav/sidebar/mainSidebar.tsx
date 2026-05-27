@@ -46,7 +46,7 @@ export default function MainSidebar() {
       icon: "wrench",
       label: "services",
       text: "Serviços",
-      href: "servicos",
+      href: "/servicos",
     },
   ]
 
