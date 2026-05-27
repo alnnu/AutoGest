@@ -8,7 +8,7 @@ import { servicesColection } from "@/utils/data/ServicesData"
 import { veiculosColection } from "@/utils/data/veiculoData"
 import { serviceType } from "@/utils/types/services"
 import { veiculosType } from "@/utils/types/veiculos"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, Wrench } from "lucide-react"
 import Link from "next/link"
 
 export default async function Veiculo({
@@ -58,12 +58,23 @@ export default async function Veiculo({
 
         <div className="grid grid-cols-3 gap-4">
           <VeiculoCard veiculo={veiculo} />
-
           <ClientCard client={veiculo.owner} />
-
           <ServiceHistoryCard services={services} />
-
           <VeiculoServiceStatisticsCard services={services} />
+          <div className="col-start-3 rounded-xl bg-white px-5 py-4 shadow-sm">
+            <Link
+              href="#"
+              className="mb-3 flex w-full justify-center gap-2 rounded-xl bg-blue-500 py-2 text-white hover:bg-blue-600"
+            >
+              <Wrench /> Novos Serviços
+            </Link>
+            <Link
+              href="#"
+              className="flex w-full justify-center gap-2 rounded-xl bg-gray-100 py-2 hover:bg-gray-200"
+            >
+              Editar Veículo
+            </Link>
+          </div>
         </div>
       </div>
     )
