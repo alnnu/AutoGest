@@ -9,14 +9,14 @@ export default function VeiculoCard({ veiculo }: { veiculo: veiculosType }) {
   const nome = veiculo.model.split(" ")
 
   return (
-    <Card className="col-span-2">
+    <Card className="lg:col-span-2">
       <CardHeader className="border-b">
         <CardTitle className="text-xl font-bold">
           Informações do Veículo
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-3">
           <div className="text-xl">
             <h4 className="text-muted-foreground">Marca</h4>
             <p className="mt-2 font-bold">{nome[0] || "-"}</p>

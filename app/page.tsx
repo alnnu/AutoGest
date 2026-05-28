@@ -172,7 +172,7 @@ export default function Page() {
           info={vehiclesInMaintenance}
         />
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid gap-4 lg:grid-cols-2">
         <ChartLine
           chartData={getMonthlyStats(services)}
           title="Evolução de Receita e Serviços Anual"

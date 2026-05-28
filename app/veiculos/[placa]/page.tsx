@@ -71,12 +71,12 @@ export default function Veiculo({
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           <VeiculoCard veiculo={veiculo} />
           <ClientCard client={veiculo.owner} />
           <ServiceHistoryCard services={services} />
           <VeiculoServiceStatisticsCard services={services} />
-          <div className="col-start-3 flex flex-col gap-3 rounded-xl bg-white px-5 py-4 shadow-sm">
+          <div className="flex flex-col gap-3 rounded-xl bg-white px-5 py-4 shadow-sm lg:col-start-3">
             <NewServiceOrderDialog
               onAddService={handleAddService}
               defaultPlaca={veiculo.placa}

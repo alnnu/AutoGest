@@ -16,7 +16,7 @@ export default function ServiceHistoryCard({
     }).format(value)
   }
   return (
-    <Card className="col-span-2">
+    <Card className="lg:col-span-2">
       <CardHeader className="border-b">
         <div className="flex justify-between">
           <CardTitle className="text-xl font-bold">

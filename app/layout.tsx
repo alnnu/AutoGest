@@ -33,8 +33,18 @@ export default function RootLayout({
         <ThemeProvider>
           <SidebarProvider>
             <MainSidebar />
+            <div className="size-full">
+              <header className="sticky top-2 z-40 flex items-center justify-between border-b bg-white p-4 md:hidden">
+                <div className="flex items-center gap-4">
+                  <SidebarTrigger />
+                  <span className="text-xl font-bold">AutoGest</span>
+                </div>
+              </header>
 
-            <main className="w-full bg-gray-100 px-4 py-8 md:px-12">{children}</main>
+              <main className="w-full bg-gray-100 px-4 py-8 md:px-12">
+                {children}
+              </main>
+            </div>
           </SidebarProvider>
         </ThemeProvider>
       </body>
