@@ -76,8 +76,8 @@ export function WorkerChartBar({
                 offset={8}
                 className="fill-foreground"
                 fontSize={12}
-                formatter={(value: number) =>
-                  `R$ ${value.toLocaleString("pt-BR")}`
+                formatter={(value: any) =>
+                  `R$ ${Number(value).toLocaleString("pt-BR")}`
                 }
               />
             </Bar>
