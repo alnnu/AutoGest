@@ -56,7 +56,7 @@ export default function ServiceHistoryCard({
 
                 <div className="mt-4 grid grid-cols-3 text-muted-foreground">
                   <span className="flex items-center gap-2">
-                    <Calendar className="size-4" /> {service.date}
+                    <Calendar className="size-4" /> {service.createdAt}
                   </span>
                   <span className="flex items-center gap-2">
                     <Wrench className="size-4" /> {service.worker}

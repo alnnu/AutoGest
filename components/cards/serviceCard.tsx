@@ -56,7 +56,7 @@ export default function ServiceCard({ service }: { service: serviceType }) {
             <span className="flex items-center gap-3 text-muted-foreground">
               <Calendar className="size-4" /> Data
             </span>
-            <span>{service.date}</span>
+            <span>{service.createdAt}</span>
           </div>
           <div className="flex w-full justify-between">
             <span className="flex items-center gap-3 text-muted-foreground">

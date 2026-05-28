@@ -10,6 +10,7 @@ export const veiculosColection: veiculosType[] = [
     owner: clientsColection[0],
     km: 15000,
     status: "ativo",
+    createdAt: "05/01/2026",
   },
   {
     model: "Honda Civic",
@@ -19,6 +20,7 @@ export const veiculosColection: veiculosType[] = [
     owner: clientsColection[1],
     km: 25000,
     status: "Em Manutenção",
+    createdAt: "12/02/2026",
   },
   {
     model: "Volkswagen Golf",
@@ -28,6 +30,7 @@ export const veiculosColection: veiculosType[] = [
     owner: clientsColection[2],
     km: 5000,
     status: "Concluído",
+    createdAt: "18/03/2026",
   },
   {
     model: "Ford Ka",
@@ -37,6 +40,7 @@ export const veiculosColection: veiculosType[] = [
     owner: clientsColection[3],
     km: 45000,
     status: "ativo",
+    createdAt: "22/04/2026",
   },
   {
     model: "Fiat Uno",
@@ -46,6 +50,7 @@ export const veiculosColection: veiculosType[] = [
     owner: clientsColection[0],
     km: 120000,
     status: "ativo",
+    createdAt: "10/05/2026",
   },
   {
     model: "Chevrolet Onix",
@@ -55,5 +60,6 @@ export const veiculosColection: veiculosType[] = [
     owner: clientsColection[1],
     km: 35000,
     status: "Em Manutenção",
+    createdAt: "25/05/2026",
   },
 ]

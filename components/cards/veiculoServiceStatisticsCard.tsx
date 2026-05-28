@@ -43,7 +43,7 @@ export default function VeiculoServiceStatisticsCard({
             <Calendar className="size-6 text-yellow-700" />
             <span className="flex-1">Último Serviço</span>
           </div>
-          <p className="my-1 font-bold">{lastService.date}</p>
+          <p className="my-1 font-bold">{lastService.createdAt}</p>
           <p>{lastService.desc}</p>
         </div>
       </CardContent>

@@ -5,7 +5,7 @@ export type serviceType = {
   type: "freio" | "motor" | "pneus" | "eletrica"
   desc: string
   worker: string
-  date: string
+  createdAt: string
   value: number
   status: "concluidos" | "em andamento" | "pendentes"
 }

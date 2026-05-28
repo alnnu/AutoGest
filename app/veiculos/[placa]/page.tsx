@@ -27,7 +27,7 @@ export default async function Veiculo({
 
   const services: serviceType[] = allServices
     .filter((e) => e.veiculo.placa === placa)
-    .sort((a, b) => a.date.localeCompare(b.date))
+    .sort((a, b) => a.createdAt.localeCompare(b.createdAt))
   if (veiculo) {
     return (
       <div className="flex flex-col gap-6">

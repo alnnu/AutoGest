@@ -8,4 +8,5 @@ export type veiculosType = {
   owner: clientType
   km: number
   status: "ativo" | "Concluído" | "Em Manutenção"
+  createdAt: string
 }
