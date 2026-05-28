@@ -1,17 +1,24 @@
 "use client"
-import { Button } from "@/components/ui/button"
-import { clientsColection } from "@/utils/data/clientsData"
-import { clientType } from "@/utils/types/clients"
-import { Plus } from "lucide-react"
-import { useState } from "react"
-import { Input } from "@/components/ui/input"
 import ClientCard from "@/components/cards/clientCard"
 import DefaultInfoCard from "@/components/cards/defaultInfoCard"
+import NewClientDialog from "@/components/modals/newClientDialog"
 import NotFoundMessageBlock from "@/components/blocks/notFoundMessageBlock"
+import { Input } from "@/components/ui/input"
+import { clientsColection } from "@/utils/data/clientsData"
+import { clientType } from "@/utils/types/clients"
+import { useEffect, useState } from "react"
 
 export default function Clientes() {
   const [clients, setClients] = useState<clientType[]>(clientsColection)
+  const [search, setSearch] = useState("")
   const [filteredClients, setFilteredClients] = useState<clientType[]>(clients)
+
+  useEffect(() => {
+    const aux = clients.filter((client) =>
+      client.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+    )
+    setFilteredClients(aux)
+  }, [search, clients])
 
   const totalClients = clients.length
 
@@ -23,12 +30,8 @@ export default function Clientes() {
     (client) => client.active === true
   ).length
 
-  const filterByName = (name: string) => {
-    const aux = clients.filter((client) =>
-      client.name.toLocaleLowerCase().includes(name.toLocaleLowerCase())
-    )
-
-    setFilteredClients(aux)
+  const handleAddClient = (newClient: clientType) => {
+    setClients((prev) => [newClient, ...prev])
   }
 
   return (
@@ -41,10 +44,7 @@ export default function Clientes() {
           </p>
         </div>
         <div>
-          <Button className="w-full bg-blue-500 px-5 py-4 hover:bg-blue-600 sm:w-auto">
-            <Plus className="mr-2 h-4 w-4" />
-            Novo Cliente
-          </Button>
+          <NewClientDialog onAddClient={handleAddClient} />
         </div>
       </div>
 
@@ -52,7 +52,8 @@ export default function Clientes() {
         <Input
           placeholder="Buscar por nome"
           className="h-12"
-          onChange={(e) => filterByName(e.target.value)}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 

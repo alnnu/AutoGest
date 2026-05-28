@@ -1,18 +1,25 @@
 "use client"
-import { Button } from "@/components/ui/button"
-import { Plus } from "lucide-react"
-import { useState } from "react"
-import { Input } from "@/components/ui/input"
 import DefaultInfoCard from "@/components/cards/defaultInfoCard"
+import NewVeiculoDialog from "@/components/modals/newVeiculoDialog"
 import NotFoundMessageBlock from "@/components/blocks/notFoundMessageBlock"
-import { veiculosType } from "@/utils/types/veiculos"
-import { veiculosColection } from "@/utils/data/veiculoData"
 import VeiculosTable from "@/components/tables/veiculosTable"
+import { Input } from "@/components/ui/input"
+import { veiculosColection } from "@/utils/data/veiculoData"
+import { veiculosType } from "@/utils/types/veiculos"
+import { useEffect, useState } from "react"
 
-export default function veiculos() {
+export default function Veiculos() {
   const [veiculos, setVeiculos] = useState<veiculosType[]>(veiculosColection)
+  const [search, setSearch] = useState("")
   const [filteredVeiculos, setFilteredVeiculos] =
     useState<veiculosType[]>(veiculos)
+
+  useEffect(() => {
+    const aux = veiculos.filter((veiculo) =>
+      veiculo.placa.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+    )
+    setFilteredVeiculos(aux)
+  }, [search, veiculos])
 
   const totalVeiculos = veiculos.length
 
@@ -24,12 +31,8 @@ export default function veiculos() {
     (veiculo) => veiculo.status === "ativo"
   ).length
 
-  const filterByPlaca = (placa: string) => {
-    const aux = veiculos.filter((veiculo) =>
-      veiculo.placa.toLocaleLowerCase().includes(placa.toLocaleLowerCase())
-    )
-
-    setFilteredVeiculos(aux)
+  const handleAddVeiculo = (newVeiculo: veiculosType) => {
+    setVeiculos((prev) => [newVeiculo, ...prev])
   }
 
   return (
@@ -42,10 +45,7 @@ export default function veiculos() {
           </p>
         </div>
         <div>
-          <Button className="w-full bg-blue-500 px-5 py-4 hover:bg-blue-600 sm:w-auto">
-            <Plus className="mr-2 h-4 w-4" />
-            Novo Veículo
-          </Button>
+          <NewVeiculoDialog onAddVeiculo={handleAddVeiculo} />
         </div>
       </div>
 
@@ -53,7 +53,8 @@ export default function veiculos() {
         <Input
           placeholder="Buscar por placa"
           className="h-12"
-          onChange={(e) => filterByPlaca(e.target.value)}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
@@ -69,7 +70,7 @@ export default function veiculos() {
       )}
       {filteredVeiculos.length <= 0 && (
         <>
-          <NotFoundMessageBlock label="cliente" />
+          <NotFoundMessageBlock label="veículo" />
         </>
       )}
     </div>

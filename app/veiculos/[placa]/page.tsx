@@ -1,33 +1,48 @@
+"use client"
 import NotFoundMessageBlock from "@/components/blocks/notFoundMessageBlock"
 import ClientCard from "@/components/cards/clientCard"
 import ServiceHistoryCard from "@/components/cards/servicesHistoryCard"
 import VeiculoCard from "@/components/cards/veiculoCard"
 import VeiculoServiceStatisticsCard from "@/components/cards/veiculoServiceStatisticsCard"
+import NewServiceOrderDialog from "@/components/modals/newServiceOrderDialog"
+import EditVeiculoDialog from "@/components/modals/editVeiculoDialog"
 import { Badge } from "@/components/ui/badge"
 import { servicesColection } from "@/utils/data/ServicesData"
 import { veiculosColection } from "@/utils/data/veiculoData"
 import { serviceType } from "@/utils/types/services"
 import { veiculosType } from "@/utils/types/veiculos"
-import { ArrowLeft, Wrench } from "lucide-react"
+import { ArrowLeft, Edit } from "lucide-react"
 import Link from "next/link"
+import { use, useEffect, useState } from "react"
 
-export default async function Veiculo({
+export default function Veiculo({
   params,
 }: {
   params: Promise<{ placa: string }>
 }) {
-  const allVeiculos: veiculosType[] = veiculosColection
-  const allServices: serviceType[] = servicesColection
+  const { placa } = use(params)
 
-  const { placa } = await params
+  const [veiculo, setVeiculo] = useState<veiculosType | undefined>(undefined)
+  const [services, setServices] = useState<serviceType[]>([])
 
-  const veiculo: veiculosType | undefined = allVeiculos.find(
-    (e) => e.placa === placa
-  )
+  useEffect(() => {
+    const v = veiculosColection.find((e) => e.placa === placa)
+    setVeiculo(v)
 
-  const services: serviceType[] = allServices
-    .filter((e) => e.veiculo.placa === placa)
-    .sort((a, b) => a.createdAt.localeCompare(b.createdAt))
+    const s = servicesColection
+      .filter((e) => e.veiculo.placa === placa)
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+    setServices(s)
+  }, [placa])
+
+  const handleAddService = (newService: serviceType) => {
+    setServices((prev) => [newService, ...prev])
+  }
+
+  const handleUpdateVeiculo = (updatedVeiculo: veiculosType) => {
+    setVeiculo(updatedVeiculo)
+  }
+
   if (veiculo) {
     return (
       <div className="flex flex-col gap-6">
@@ -61,19 +76,15 @@ export default async function Veiculo({
           <ClientCard client={veiculo.owner} />
           <ServiceHistoryCard services={services} />
           <VeiculoServiceStatisticsCard services={services} />
-          <div className="col-start-3 rounded-xl bg-white px-5 py-4 shadow-sm">
-            <Link
-              href="#"
-              className="mb-3 flex w-full justify-center gap-2 rounded-xl bg-blue-500 py-2 text-white hover:bg-blue-600"
-            >
-              <Wrench /> Novos Serviços
-            </Link>
-            <Link
-              href="#"
-              className="flex w-full justify-center gap-2 rounded-xl bg-gray-100 py-2 hover:bg-gray-200"
-            >
-              Editar Veículo
-            </Link>
+          <div className="col-start-3 flex flex-col gap-3 rounded-xl bg-white px-5 py-4 shadow-sm">
+            <NewServiceOrderDialog
+              onAddService={handleAddService}
+              defaultPlaca={veiculo.placa}
+            />
+            <EditVeiculoDialog
+              veiculo={veiculo}
+              onUpdateVeiculo={handleUpdateVeiculo}
+            />
           </div>
         </div>
       </div>

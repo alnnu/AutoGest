@@ -3,17 +3,26 @@
 import NotFoundMessageBlock from "@/components/blocks/notFoundMessageBlock"
 import DefaultInfoCard from "@/components/cards/defaultInfoCard"
 import ServiceCard from "@/components/cards/serviceCard"
-import { Button } from "@/components/ui/button"
+import NewServiceOrderDialog from "@/components/modals/newServiceOrderDialog"
 import { Input } from "@/components/ui/input"
 import { servicesColection } from "@/utils/data/ServicesData"
 import { serviceType } from "@/utils/types/services"
-import { Plus } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function Servicos() {
   const [services, setServices] = useState<serviceType[]>(servicesColection)
+  const [search, setSearch] = useState("")
   const [filteredServices, setFilteredServices] =
     useState<serviceType[]>(services)
+
+  useEffect(() => {
+    const aux = services.filter(
+      (e) =>
+        e.desc.toLocaleLowerCase().includes(search.toLocaleLowerCase()) ||
+        e.veiculo.placa.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+    )
+    setFilteredServices(aux)
+  }, [search, services])
 
   const totalServices = services.length
 
@@ -29,13 +38,10 @@ export default function Servicos() {
     (e) => e.status === "pendentes"
   ).length
 
-  const filterByDesc = (desc: string) => {
-    const aux = services.filter((e) =>
-      e.desc.toLocaleLowerCase().includes(desc.toLocaleLowerCase())
-    )
-
-    setFilteredServices(aux)
+  const handleAddService = (newService: serviceType) => {
+    setServices((prev) => [newService, ...prev])
   }
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -46,17 +52,15 @@ export default function Servicos() {
           </p>
         </div>
         <div>
-          <Button className="w-full bg-blue-500 px-5 py-4 hover:bg-blue-600 sm:w-auto">
-            <Plus className="mr-2 h-4 w-4" />
-            Nova Ordem
-          </Button>
+          <NewServiceOrderDialog onAddService={handleAddService} />
         </div>
       </div>
       <div className="w-full rounded-xl bg-white px-6 py-4 shadow-sm">
         <Input
-          placeholder="Buscar por placa"
+          placeholder="Buscar por placa ou descrição"
           className="h-12"
-          onChange={(e) => filterByDesc(e.target.value)}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -73,7 +77,7 @@ export default function Servicos() {
       </div>
       {filteredServices.length <= 0 && (
         <>
-          <NotFoundMessageBlock label="cliente" />
+          <NotFoundMessageBlock label="serviço" />
         </>
       )}
     </div>

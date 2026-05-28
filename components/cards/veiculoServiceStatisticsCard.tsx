@@ -14,7 +14,7 @@ export default function VeiculoServiceStatisticsCard({
     }).format(value)
   }
 
-  const lastService: serviceType = services[services.length - 1]
+  const lastService: serviceType = services[0]
 
   const totalSpent = services.reduce((total, curr) => total + curr.value, 0)
   return (
