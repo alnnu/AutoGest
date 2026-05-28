@@ -28,7 +28,7 @@ export default function MainSidebar() {
       icon: "layout-dashboard",
       label: "dashboard",
       text: "Dashboard",
-      href: "/dashboard",
+      href: "/",
     },
     {
       icon: "users-round",

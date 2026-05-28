@@ -8,7 +8,7 @@ export const clientsColection: clientType[] = [
     phone: "(11) 98765-4321",
     image: undefined,
     active: true,
-    createdAt: "14/01/2024",
+    createdAt: "14/01/2026",
   },
   {
     name: "Maria Santos",
@@ -17,7 +17,7 @@ export const clientsColection: clientType[] = [
     phone: "(11) 97654-3210",
     image: undefined,
     active: true,
-    createdAt: "19/02/2024",
+    createdAt: "19/02/2026",
   },
   {
     name: "Pedro Oliveira",
@@ -26,7 +26,7 @@ export const clientsColection: clientType[] = [
     phone: "(11) 96543-2109",
     image: undefined,
     active: true,
-    createdAt: "09/03/2024",
+    createdAt: "09/03/2026",
   },
   {
     name: "Ana Costa",
@@ -35,6 +35,6 @@ export const clientsColection: clientType[] = [
     phone: "(11) 95432-1098",
     image: undefined,
     active: true,
-    createdAt: "04/04/2024",
+    createdAt: "04/04/2026",
   },
 ]
